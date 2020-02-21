@@ -1,0 +1,10 @@
+<% if(urls) { %>
+<div>
+    <ul>
+        <% urls.forEach(url => { %>
+            <li> <%= url.protocol %>://<%= url.url %> : <a href="/getUrlOf/item-<%= url._id %>">/getUrlOf/item-<%= url._id %></a></li>
+        <% }) %>
+    </ul>
+</div>
+
+<% } %>

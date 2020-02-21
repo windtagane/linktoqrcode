@@ -1,0 +1,66 @@
+<% include partials/links.ejs %> <% include partials/menu.ejs %>
+
+<div class="mx-auto justify-content-center">
+	<% if(pagination) { %>
+	<div class="card bg-light w-50">
+		<div class="card-header">
+			Blabla
+		</div>
+		<div class="card-body">
+			<ul>
+				<% pagination.forEach(url => { %>
+				<li>
+					<%= url.protocol %>://<%= url.url %> -
+					<button
+						class="btnModalQRcode btn btn-primary m-1"
+						data-id="<%= url._id %>"
+					>
+						Voir le lien
+					</button>
+				</li>
+				<% }) %>
+			</ul>
+		</div>
+		<ul class="pagination card-footer justify-content-center">
+			<% pages.forEach((page) => { %>
+			<li class="page-item">
+				<a class="page-link" href="<%= page.url %>"
+					><%= page.number %></a
+				>
+			</li>
+			<% }) %>
+		</ul>
+	</div>
+	<% } %>
+</div>
+<% include partials/modal_qrcode.ejs %> <% include partials/links.ejs %>
+
+<script>
+	let btnModal = $(".btnModalQRcode");
+	let modal = $("#modal_qrcode");
+
+	function GetQRCode(id) {
+		$.get("qrcode/" + id, function(data, status) {
+			if (status == "success") {
+				let imgQRCode = $(".qrcode").html(`<img src="${data.qrcode}">`);
+				return imgQRCode;
+			}
+		});
+	}
+
+	function CloseModal() {
+		modal.hide();
+	}
+
+	btnModal.on("click", function() {
+		let id = $(this).data("id");
+		let host = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port;
+		GetQRCode(id);
+		$(".modal-title").html(`<div class="card-title">${id}</div>`);
+		$(".direct-link").html(
+			`<a href="${host}/getUrlOf/item-${id}" target="blank_">${host}/getUrlOf/item-${id}</a>`
+		);
+
+		modal.show();
+	});
+</script>

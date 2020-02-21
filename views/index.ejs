@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+
+  <body>
+    <% include partials/links.ejs %>
+    
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <% include partials/menu.ejs %>
+    
+    <div>
+      <form action="/create" method="POST">
+        <input name="url" type="text" pattern="[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$" placeholder="www.monsite.com">
+        <select name="protocol" id="">
+          <option value="https">HTTP/HTTPS</option>
+          <option value="ftp">FTP</option>
+        </select>
+        <button type="submit">Valider</button>
+      </form>
+    </div>
+
+    <!-- <% include list.ejs %> -->
+
+  </body>
+</html>
