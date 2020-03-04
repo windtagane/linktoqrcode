@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const DATABASE = require("../../bin/database");
 
 	// L'adresse de mon serveur
-    //let dbUrl = DATABASE.LOCAL.URL + DATABASE.LOCAL.NAME;
-    let dbUrl = "mongodb://localhost:27017/" + "onsaitpas";
+    let dbUrl = DATABASE.LOCAL.URL + DATABASE.LOCAL.NAME;
+    //let dbUrl = "mongodb://localhost:27017/" + "onsaitpas";
 	
 	mongoose
 		.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})

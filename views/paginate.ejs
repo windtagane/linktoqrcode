@@ -40,7 +40,7 @@
 	let modal = $("#modal_qrcode");
 
 	function GetQRCode(id) {
-		$.get("qrcode/" + id, function(data, status) {
+		$.get("qrcode/" + id + "/", function(data, status) {
 			if (status == "success") {
 				let imgQRCode = $(".qrcode").html(`<img src="${data.qrcode}">`);
 				return imgQRCode;

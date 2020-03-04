@@ -2,7 +2,7 @@ const UrlModel = require("../models/UrlModel");
 const UrlController = {};
 
 const paginate = require("express-paginate");
-const QRCode = require("qrcode");
+const QRCode = require("qrcode");	
 
 const sanitize = require("mongo-sanitize");
 
@@ -83,7 +83,8 @@ UrlController.paginate = async(req, res, next) => {
 
 
 UrlController.qrcode = (req, res) => {
-	let url = "/getUrlOf/item-" + req.params.id;
+	let host = req.get('host');
+	let url = host + "/getUrlOf/item-" + req.params.id;
 	QRCode.toDataURL(url, function(err, url) {
 		res.json({
 			success: "OK",
